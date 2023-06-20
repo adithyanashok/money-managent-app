@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:money_management_app/db/category/category_db.dart';
+import 'package:money_management_app/models/category/category_model.dart';
+import 'package:money_management_app/screens/category/category_add_popup.dart';
 import 'package:money_management_app/screens/category/category_screen.dart';
 import 'package:money_management_app/screens/transactions/transaction_screen.dart';
 import 'package:money_management_app/screens/widgets/bottom_navbar.dart';
@@ -11,7 +14,11 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Money Manager")),
+      backgroundColor: Colors.grey[200],
+      appBar: AppBar(
+        title: const Text("Money Manager"),
+        centerTitle: true,
+      ),
       bottomNavigationBar: const MoneyBottomNavigationBar(),
       body: ValueListenableBuilder(
         valueListenable: selectedIndex,
@@ -25,6 +32,13 @@ class HomeScreen extends StatelessWidget {
             print("Transactions Floating....");
           } else {
             print("Category Floating...");
+            showAddCategoryPopup(context);
+            // final _sample = CategoryModel(
+            //   id: DateTime.now().millisecondsSinceEpoch.toString(), 
+            //   name: "Travel", 
+            //   type: CategoryType.expense
+            // );
+            // CategoryDB().insetCategory(_sample);
           }
         },
         child: const Icon(Icons.add),
