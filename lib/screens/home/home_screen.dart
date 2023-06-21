@@ -3,6 +3,7 @@ import 'package:money_management_app/db/category/category_db.dart';
 import 'package:money_management_app/models/category/category_model.dart';
 import 'package:money_management_app/screens/category/category_add_popup.dart';
 import 'package:money_management_app/screens/category/category_screen.dart';
+import 'package:money_management_app/screens/transactions/add_transaction_screen.dart';
 import 'package:money_management_app/screens/transactions/transaction_screen.dart';
 import 'package:money_management_app/screens/widgets/bottom_navbar.dart';
 
@@ -30,6 +31,7 @@ class HomeScreen extends StatelessWidget {
         onPressed: () {
           if (selectedIndex.value == 0) {
             print("Transactions Floating....");
+            Navigator.of(context).pushNamed(AddTransactionScreen.routename);
           } else {
             print("Category Floating...");
             showAddCategoryPopup(context);

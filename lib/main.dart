@@ -2,20 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:money_management_app/db/category/category_db.dart';
 import 'package:money_management_app/models/category/category_model.dart';
+import 'package:money_management_app/models/transaction/transaction_model.dart';
+import 'package:money_management_app/screens/transactions/add_transaction_screen.dart';
 import 'package:money_management_app/screens/home/home_screen.dart';
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  Hive.initFlutter();
+  await Hive.initFlutter();
+  if(!Hive.isAdapterRegistered(TransactionModelAdapter().typeId)){
+    Hive.registerAdapter(TransactionModelAdapter());
+  }
   if(!Hive.isAdapterRegistered(CategoryTypeAdapter().typeId)){
     Hive.registerAdapter(CategoryTypeAdapter());
   }
   if(!Hive.isAdapterRegistered(CategoryModelAdapter().typeId)){
     Hive.registerAdapter(CategoryModelAdapter());
   }
-  final obj1 = CategoryDB();
-  final obj2 = CategoryDB();
-  print(obj1 == obj2);
+  if(!Hive.isAdapterRegistered(TransactionModelAdapter().typeId)){
+    Hive.registerAdapter(TransactionModelAdapter());
+  }
+  
   runApp(const MyApp());
 }
 
@@ -30,7 +36,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue
       ),
-      home: HomeScreen(),
+      home: const HomeScreen(),
+      routes: {
+        AddTransactionScreen.routename: (ctx) => const AddTransactionScreen()
+      }
     );
   }
 }
